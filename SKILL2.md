@@ -1,78 +1,49 @@
 ---
-name: project-revival-online-screening
-description: Scores PPT-plus-repository submissions for Project Revival against its six published Round 1 criteria, checks existing-project evidence, ranks submissions for a shortlist, and applies an optional capped SDG bonus.
+name: project-revival-challenge-designer
+description: Converts approved Round 1 submissions into one fair, codebase-specific offline feature challenge, calibrated to actual build time and a common cohort difficulty tier.
 ---
 
-# Project Revival Online Screening
+# Project Revival Offline Challenge Designer
 
 ## Mission
-Rank submissions for Project Revival's online shortlist using the six published Round 1 criteria. Apply the official eligibility and authenticity rules in `references/event-rules.md`. Eligibility is open to undergraduate and postgraduate students across all disciplines. Purely cloned or plagiarized codebases are disqualifying when substantiated under organizer review. Do not confuse legitimate reuse of libraries with plagiarism. The Round 1 submitted codebase becomes the mandatory baseline for Round 2. The official Stage 3 judging breakdown is 60% Custom Feature Implementation and 40% Original Project Depth; this is separate from the Round 1 screening score. The six Round 1 criteria are:
-1. Technical depth
-2. Code originality
-3. System architecture
-4. Execution quality
-5. Design and creativity
-6. Growth potential
+Design one bespoke, technically meaningful feature challenge for each shortlisted project. Teams must build upon the exact codebase submitted during Round 1; building a completely new project is strictly prohibited. The brief must explicitly state this constraint and define how judges can verify integration with the original codebase. Reuse the approved Round 1 report and verified findings; do not re-audit the entire repository unless new evidence affects the chosen task.
 
-This is a competitive ranking, not a generic pass/fail gate. The organizer decides the final shortlist.
+## Rules source and handoff
+Read `references/event-rules.md` shipped inside this skill folder. If another rules file is supplied, compare rule versions and resolve conflicts with the organizer. The bundle-root copy is a convenience only; keep all three copies identical.
+Use the Round 1 screening report, PPT, repository URL, and verified capability notes as inputs. If the handoff is missing, do a concise audit and note that fact.
 
-## Rules source
-Read the `references/event-rules.md` shipped inside this skill folder. If a separately supplied event-rules file is provided, compare its rule version. If versions differ, stop final ranking and ask which version controls. Do not rely on a root file that may not be installed with the skill. The root copy in the bundle is a convenience; all three copies must remain identical.
+## Active build time
+The overall event window is currently 10:00–16:00, but this includes briefing/handout, setup, breaks, testing, demo preparation, and Stage 3 demos/defense. Never assume six hours of coding. Use the active coding window from event rules. If it is unset, ask the organizer before finalizing; a provisional plan may assume 3 active build hours, clearly labelled as an assumption.
 
-Do not invent missing eligibility rules, N, cutoff, or tie-breaks. If N is unset, provide provisional rankings only and request organizer confirmation.
+## One common tier for the cohort
+Use the single cohort-wide tier specified in event rules. Do not independently assign a different tier to each team by default. Tailor the feature to each codebase while keeping effort, uncertainty, and proof burden comparable.
 
-## Inputs
-Expected: PPT/PDF, repository URL or source bundle, project/team ID, demo/deployment link if available, and contribution/reuse disclosures required by event rules. Extract the repository URL from the PPT where possible. The PPT is the team's narrative; repository and demo evidence are used to validate its claims.
+- **Tier A — Focused integration:** 1–2 effort points; one focused component with a clear interface.
+- **Tier B — Bounded end-to-end feature:** 2–3 effort points; use only when at least 4 active coding hours are confirmed and dependencies are low risk.
+- **Tier C:** disabled by default; only if organizer explicitly enables and calibrates it.
+- Effort points are relative, not exact hours. Do not use 5-point tasks for this event by default.
 
-## Evidence and repository inspection protocol
-1. Record artifacts, links, reviewer, review date, rule version, branch/commit hash if available, and access status.
-2. Inspect PPT claims about problem, features, architecture, tech stack, novelty, demo, and repo.
-3. Inspect repository tree, README, dependency/config files, entry points, tests, key implementation files, and history where accessible.
-4. If execution is attempted, use an isolated sandbox/container/VM with no real credentials or sensitive files. Do not auto-run install scripts; inspect scripts/dependencies first. Never run untrusted code on the host with secrets. If safe isolation is unavailable, do not execute it.
-5. Use the same **8-minute default inspection/run time-box** per submission unless event rules change it before the batch begins. Record commands and outcomes. If execution is not attempted or fails due to environment/API key/database/GPU requirements, mark `unverified-environment`; do not lower the score as if software failure were proven.
-6. Compare slide claims against repository/demo evidence in a claims-vs-evidence table.
-7. Label claims Verified, Partially verified, Unverified, or Unverified-environment. Never claim to have run code/tests/scans unless actually done.
+## Lightweight workflow
+1. Reuse the Round 1 report's verified project summary, stack, strengths, and unknowns.
+2. Identify natural extension points and avoid rewrites.
+3. Generate three candidate challenges. For each, state the user/engineering value, likely integration point, risk, effort points, and demo proof.
+4. Rank using 0–10 scores: impact 35%, relevance 25%, feasibility 20%, demonstrability 20%.
+5. Select one primary challenge aligned to the cohort tier and active build time. Include only essential supporting requirements, one optional stretch goal, and fallback scope.
+6. Make acceptance criteria observable; include a happy path, edge/failure case, regression check, and a short demo sequence.
+7. Keep the team-facing brief to about one page. Candidate ranking and organizer-only rationale must not be sent to teams.
 
-## Existing-project authenticity
-The event expects an existing project. Compare available history to the announcement date specified in event rules. Consider repository creation date, earliest meaningful commits, progression across commits, releases/issues/PRs, prior demos, package releases, and independent dated evidence. A new repository or one large initial commit is a review flag, not proof of misconduct: migrations, squashed history, mirrors, and private transfers can be legitimate. Apply automatic ineligibility only if published rules explicitly say so and evidence satisfies them. Ask for clarification within the cure period.
+## Optional SDG context
+Event focus SDGs are 4, 8, 9, 11, 12, 17. SDG alignment is optional and never an eligibility requirement. Add a brief organizer-only note only when the project has a genuine connection. Consider an SDG-deepening feature only if it naturally fits the project's purpose and does not make workload or judging less fair. Do not force-fit SDGs or invent impact claims.
 
-## Code originality method
-Assess project-specific logic, algorithms, workflows, integrations, engineering choices, and the team's implementation contribution. Compare PPT claims to observable code and history. Check attribution/disclosures for major reused components. Libraries, frameworks, pretrained models, templates, tutorials, and AI-assisted code are not inherently disqualifying; apply the exact policy in event rules. Do not accuse a team of plagiarism from similarity alone. Uncertain provenance is a concern for organizer review, not a proven finding.
+## Official rules and Stage 3 boundary
+Teams must adhere to the bespoke feature challenge and continue from the exact Round 1 submitted codebase. Include the original repository URL and baseline commit/archive reference in organizer-only notes, and state the codebase constraint in the team-facing brief. Building a completely new project is prohibited.
 
-## Base score — 100 points
-Scores must be **whole numbers only**. Apply the anchors proportionally to each category maximum and avoid double-penalizing a single weakness.
+Judges/organizers own Stage 3 decisions, which are final and non-contestable. The official evaluation breakdown is **60% Custom Feature Implementation** (technical implementation/functionality, integration with existing codebase, innovation/code quality/modularity, execution/delivery within the sprint) and **40% Original Project Depth** (originality/technical maturity, architecture/complexity, UX/completeness/stability). Do not impose a different compulsory rubric. Optional checklists must map to these categories and are only provided when requested.
 
-General anchors, expressed as a percentage of category maximum:
-- **0–19%:** no credible evidence or core claim contradicted.
-- **20–39%:** weak/superficial; little implementation evidence.
-- **40–59%:** adequate baseline with notable gaps.
-- **60–79%:** strong and coherent evidence with limited gaps.
-- **80–99%:** exceptional for the cohort, technically convincing and well-supported.
-- **100%:** outstanding evidence across the criterion; use sparingly.
-
-1. **Technical depth — 25:** meaningful technical problem-solving, algorithms/models/systems/data/integrations and trade-offs; do not privilege AI over other domains.
-2. **Code originality — 20:** distinctive team contribution, project-specific logic/integration, appropriate attribution, and transparency about reuse.
-3. **System architecture — 15:** coherent modules, data/control flow, separation of concerns, interfaces, and justified technology choices; compare PPT diagrams to code.
-4. **Execution quality — 15:** implementation evidence and completeness relative to claims, reproducible demo, tests/error handling where appropriate. Separate environment failure from software failure.
-5. **Design and creativity — 15:** suitability and thoughtfulness of UX, interaction design, creative approach, and design/demo evidence; don't reward decoration alone.
-6. **Growth potential — 10:** credible path to further development, extensibility, adoption, users, or impact grounded in the actual project.
-
-## Optional SDG bonus — +0 to +2
-Only assess if a team claims alignment or a credible connection is apparent. No claim means +0, no penalty. Event focus: SDGs 4, 8, 9, 11, 12, 17.
-- +0: no credible causal link; no penalty.
-- +1: plausible, specific connection between actual functionality and a named focus SDG.
-- +2: clear, supported connection with responsibly qualified impact claims.
-A label/icon alone is not evidence. Do not require measured societal impact from a student prototype. SDG alignment is never an eligibility gate.
-
-## Ranking and calibration
-- **Total = base score (0–100) + SDG bonus (0–2). Rank descending by total /102.** If total scores tie, apply the tie-break order confirmed in event rules. Recommended order: technical depth, code originality, architecture, execution quality, design/creativity, growth potential.
-- If N is not set, return a provisional ranking and request it; do not invent a cutoff.
-- If repo access is unavailable, private without access, or evidence is too incomplete to score fairly, put the submission in a **clarification/review queue**. Do not automatically rank it last. Apply the published cure period and then rescore with the same rules.
-- Before the full batch, calibrate on 3–5 varied sample submissions. Have organizers review score rationales and adjust anchors/policy once, before batch scoring. Freeze the rubric and event-rule version. Then score all submissions using the frozen rubric. Do not change anchors mid-batch except through a documented, cohort-wide correction.
-- Borderline, disputed originality, and possible rule violations require a second reviewer.
+Teams are encouraged to discuss real-world applicability, scalability, technological sustainability, and relevant SDG alignment during the live defense. SDG alignment is encouraged, not mandatory; do not force an SDG feature into the challenge.
 
 ## Output
-Use `templates/screening-report.md` for each submission and `templates/leaderboard.md` for batch ranking. Include metadata, PPT-vs-code table, authenticity review, six scores with rationale, optional bonus, total /102, rank/recommendation, confidence, clarification queue, and organizer-only notes. Keep reviewer speculation private and team messages neutral.
+Use `templates/challenge-brief.md`. Include organizer-only candidate ranking, common cohort tier, effort estimate, active build-time assumption, dependencies, approval/version, and optional SDG note if relevant. Team-facing brief includes objective, required behavior, acceptance criteria, integration boundaries, non-goals, tests, demo proof, fallback/stretch, and submission deliverables.
 
-## Fairness
-Use identical time-boxes and evidence standards. Do not privilege a stack, school, team size, polished slides, number of commits, or deployment unless event rules say otherwise. Separate missing evidence from proven failure. Organizers make final decisions.
+## Final check
+Confirm the cohort tier matches event rules; active build time is real; Round 1 findings were reused; one coherent feature is feasible; requirements are testable; dependencies are available; SDG is not forced; and no new judging or event rules were invented. Organizer approves the final assignment.
