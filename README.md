@@ -1,4 +1,4 @@
-# Project Revival — Revised Bundle B
+# Project Revival
 
 ## Skills
 - `project-revival-online-screening/SKILL.md`: Round 1 PPT/repository screening, six published criteria, originality and authenticity checks, ranking, optional SDG bonus.
